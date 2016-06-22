@@ -1,0 +1,4 @@
+lsb_release -da
+hostnamectl
+cat /etc/debian_version
+cat /etc/issue

@@ -1,0 +1,2 @@
+killall xwinwrap
+xwinwrap -ni -o 1.0 -fs -s -st -sp -b -nf -- mplayer -wid WID -quiet -nosound /media/chadamine/Video/anime/film/Evangelion_2.22_You_Can_(Not)_Advance_1080p.mkv -loop 0

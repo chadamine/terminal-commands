@@ -1,0 +1,37 @@
+
+
+# Install
+
+# Update
+
+# Upgrade
+sudo npm install -g npm
+
+# Install generator
+sudo npm install -g generator
+
+# Setup generator default templates
+generate --setup
+
+# bootstrap project using default generator template
+generate --template npm --name kittycannon
+
+# Templates
+# ~/.generator
+
+__description__
+
+@package __name__
+@author __author__ <__email__>
+
+# will prompt:
+description:
+author:
+email:
+
+# which will generate:
+[description]
+@package [package]
+@author [author] <[email]>
+
+

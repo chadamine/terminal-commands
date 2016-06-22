@@ -1,0 +1,9 @@
+
+# install ctags
+sudo apt-get install exuberant-ctags
+
+# generate ruby tags
+ctags -R --languages=ruby --exclude=.git --exclude=log .
+
+# generate ruby and bundled library tags
+ctags -R --languages=ruby --exclude=.git --exclude=log . $(bundle list --paths)

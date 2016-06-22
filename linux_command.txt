@@ -1,0 +1,83 @@
+System Configuration And Hardware Information
+
+cat /proc/cpuinfo
+
+---------------------
+CPU/Hardware
+---------------------
+less /proc/cpuinfo
+
+lscpu
+
+---------------------
+Free and Used Memory
+---------------------
+cat /proc/meminfo
+free
+free -m
+free -mt
+free -gt
+
+top
+htop
+atop
+
+--------------------------------
+
+--------------------------------
+Ram Speed and Max Supported Ram
+--------------------------------
+dmidecode --type 17
+lshw -short -C memory
+perl memconf.v3.06.pl -v
+
+--------------------------------
+
+--------------------------------
+Current Running Kernel Version
+--------------------------------
+cat /proc/version
+
+uname -mrs
+uname -a
+
+cat /etc/*release*
+
+--------------------------------
+
+List all PCI Devices
+lspci
+
+List All USB Devices
+lsusb
+
+List all block devices (hard disks, cdrom, and others)
+lsblk
+
+Display installed hard disk and size
+fdisk -l | grep '^Disk /dev/'
+
+Display information about hardware RAID
+arcconf getconfig DEV
+/usr/StorMan/arcconf getconfig 1
+
+See info about 3ware hardware RAID:
+# tw_cli /dev show
+# tw_cli /c0 show
+
+Say hello to lshw
+The lshw is a small command line tool to extract detailed information on the hardware configuration of the machine. It can report exact memory configuration, firmware version, mainboard configuration, CPU version and speed, cache configuration, bus speed, etc. on DMI-capable x86 or IA-64 systems and on some PowerPC machines (PowerMac G4 is known to work):
+
+# lshw | more
+# lshw -html > output.htmlq
+# lshw -short | less
+
+Dump all hardware information
+dmidecode | less
+
+Source:
+http://www.cyberciti.biz/faq/linux-command-to-find-the-system-configuration-and-hardware-information/
+
+
+
+

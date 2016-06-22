@@ -1,0 +1,23 @@
+# check all installed packages
+cat /var/log/dpkg.log | grep "\ install\ "
+
+# installed via apt-get
+cat /var/log/apt/history.log | grep "\ install\ "
+
+# check info of package
+sudo apt-cache policy <package>
+
+# simulate possible upgrades
+apt-get -V -s upgrade
+
+# simulate install
+apt-get -s install <package>
+
+# Fix interrupted apt install
+sudo dpkg --configure -a
+
+# Installed packages:
+dpkg --get-selections | grep -v deinstall
+dpkg --get-selections | grep postgres
+dpkg -l
+apt --installed list

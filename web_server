@@ -1,0 +1,19 @@
+### Bundle Contents ###
+# NginX
+# php
+# mysql
+
+# Source 
+# https://www.howtoforge.com/installing-nginx-with-php5-and-mysql-support-on-debian-squeeze
+
+
+
+# Install lighttpd
+# (need spawn-fcgi to start FastCGI)
+sudo apt-get install lighttpd
+
+spawn-fcgi 
+
+
+# Prevent lighttpd from starting at boot
+update-rc.d -f lighttpd remove

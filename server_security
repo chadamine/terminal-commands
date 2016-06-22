@@ -1,0 +1,121 @@
+##############
+### sysctl ###
+##############
+
+# backup systctl.conf
+sudo cp /etc/sysctl.conf /etc/sysctl.back.conf
+
+# edit sysctl.conf
+sudo vim /etc/sysctl.conf
+
+# Make server reboot on low memory
+vm.panic_on_oom=1
+kernel.panic=10
+
+# Specific to Linode, experiment.
+vm.swappiness=25
+
+# IP Spoofing protection
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+# Ignore ICMP broadcast requests
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+# Disable source packet routing
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv6.conf.all.accept_source_route = 0 
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+
+# Ignore send redirects
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+
+# Block SYN attacks
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 2048
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_syn_retries = 5
+
+# Log Martians
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+# Ignore ICMP redirects
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0 
+net.ipv6.conf.default.accept_redirects = 0
+
+# Ignore Directed pings
+net.ipv4.icmp_echo_ignore_all = 1
+
+# Reload configs
+sudo sysctl -p
+
+###########################
+##  Prevent IP spoofing  ##
+###########################
+
+# /etc/host.conf
+order bind,hosts
+nospoof on
+
+############################
+### Secure shared memory ###
+############################
+
+# /etc/fstab
+tmpfs /dev/shm tmpfs defaults,noexec,nosuid 0 0
+
+# Mount it
+sudo mount -a
+
+
+### Source #################
+# https://coderwall.com/p/zxffsg/linode-debian-7-web-server-setup
+
+
+################
+### fail2ban ###
+################
+
+# Install
+apt-get install fail2ban
+
+# Start server
+sudo service fail2ban start
+
+# or 
+sudo fail2ban-server -f -s /var/run/fail2ban/fail2ban.sock
+
+
+# Check for running fail2ban instances
+sudo fail2ban-client status
+
+# or
+ps -ef|grep fail2ban
+
+### Source #################
+# http://www.fail2ban.org/wiki/index.php/MANUAL_0_8
+# http://www.linuxquestions.org/questions/linux-security-4/fail2ban-showing-error-unable-to-contact-server-is-it-running-4175443451/
+
+
+
+# Checking for Rootkits
+sudo apt-get install rkhunter chkrootkit
+
+sudo rkhunter --update
+sudo rkhunter --propupd
+sudo rkhunter --check
+
+sudo chkrootkit
+
+# AppArmor
+sudo apt-get install apparmor
+
+
+
+
+

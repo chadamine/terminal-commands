@@ -1,0 +1,12 @@
+CTRL + LEFT/CTRL + RIGHT: jump between arguments
+CTRL + A/CTRL + E: Home/End
+CTRL + U: clears line
+CTRL + K: delete from cursor to end
+CTRL + W: delete word before cursor
+CTRL + R: search command history
+cd -: move to last directory
+!!: last command run
+!cat: last command that used cat
+!cat:p: view last cat command
+!$: arguments from last command
+^nanp^nano: replace first instance of nanp with nano

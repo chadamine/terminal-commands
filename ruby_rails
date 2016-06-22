@@ -1,0 +1,163 @@
+############
+### Ruby ###
+############
+
+############### rvm ####################
+
+# Install Ruby Version Manager
+sudo apt-get update
+\curl -L https://get.rvm.io | bash -s stable --rails
+source ~/.rvm/scripts/rvm
+
+### rvm commands ###
+
+# Update
+rvm get stable --autolibs=enable
+
+# Set default
+rvm --default use ruby-2.2.3
+
+# Check for outdated gems
+gem outdated
+
+# Update stale gems
+gem update
+
+rvm info
+rvm list
+rvm list known
+rvm install version_of_ruby
+rvm use version_of_ruby
+
+# Disable rdoc/ri
+# 	add following to ~/.gemrc or /etc/gemrc
+gem: --no-rdoc --no-ri
+
+
+############# Gemsets #################
+
+# List gemsets
+rvm gemset list
+
+# Create new gemset
+rvm gemset create <new_gemset_name>
+
+# Assign and create at once
+rvm use ruby-2.2.3@rails4.2 --create
+
+# Use specific gemset
+rvm gemset use <ruby version>@<gemset name>
+# or
+rvm gemset use <gemset name>
+
+
+########################
+### Troubleshoot rvm ###
+########################
+
+# Problem:
+# "RVM is not a function, selecting rubies with 'rvm use ...' will not work." #
+
+# Solution:
+source ~/.rvm/scripts/rvm
+
+# Test:
+type rvm | head -n 1 		# should give "rvm is a function"
+
+# Source:
+# http://stackoverflow.com/questions/9336596/rvm-installation-not-working-rvm-is-not-a-function
+
+
+#############
+### Rails ###
+#############
+
+# Install rails v
+gem install rails -v 4.1.0
+
+# Install rails v, full
+gem install rails --version=3.2.18
+
+# Install bundler
+gem install bundler
+
+# Install rails
+gem install rails
+
+# Create Rails Application
+cd ~
+rails new sample
+cd sample
+
+# Edit Gemfile
+vim Gemfile
+
+# Insert following into Gemfile
+# gem 'execjs'
+
+# if node not installed?
+# gem 'therubyracer'
+
+# Install dependencies
+bundle install
+
+# Start Development Server
+rails s
+
+# Navigate to the following:
+# your_IP_or_domain:3000
+# or
+# localhost:3000
+
+# Source:
+# https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
+
+
+#########################
+### Phusion Passenger ###
+#########################
+
+# Install passenger
+gem install passenger
+
+# Install nginx module
+passenger-install-nginx-module
+
+# Start passenger standalone
+#		must be in root of app
+rvmsudo passenger start
+
+# Configure passenger with nginx
+# create file: /etc/nginx/sites-available/my-website(.conf)
+# with contents:
+#
+# server {
+# 	listen <port> default_server;
+#		server_name www.mywebsite.com
+# 	passenger_enabled on;
+# 	passenger_app_env development
+# 	root /root/of/app/public
+# }
+# where:
+#
+# <port> replaced with port number
+# www.mywebsite.com replaced with site
+# root points to root of app containing ../public folder
+
+# restart nginx for changes to take effect
+sudo service nginx restart
+
+# passenger_root for nginx.conf http block
+passenger-config --root
+
+# passenger_ruby for mysite.conf server block
+passenger-config --ruby-command
+
+# Change location of passenger stuff in nginx.conf
+pconfig=$(passenger-config --ruby-command)
+# or 
+# pconfig=$(passenger-config about ruby-command)
+
+proot=$($pconfig --ruby-version)
+sed -i '/passenger_root/c\<root_location>' /etc/nginx/nginx.conf
+sed -i '/passenger_ruby/c\passenger_root <ruby_location>' /etc/nginx/nginx.conf

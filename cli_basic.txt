@@ -1,0 +1,40 @@
+# home: 
+ctrl + a
+
+# end:  
+ctrl + e
+
+# clearline: 
+ctrl + u
+
+# delete  to end: 
+ctrl + k
+
+# delete word before cursor: 
+ctrl + w
+
+# previous directory: 
+cd -
+
+# run previous command as sudo: 
+sudo !!
+
+# run last command search: 
+!<search_string>
+
+# print last command and append to history
+!<search_string>:p
+
+# use arguments from previous command
+<command> !$
+
+# search history
+history | grep <search_string>
+# run history entry
+!<history_entry_number>
+
+# keep command out of history
+# add space before command
+
+
+

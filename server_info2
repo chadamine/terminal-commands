@@ -1,0 +1,18 @@
+# Checking ports
+sudo netstat -plnt
+
+# -p: pid pname
+# -l: listening server sockets
+# -n: num address
+# -t: tcp
+
+# -u: udp
+# -a: listening + non-listening sockets
+
+# Filtering the list
+sudo netstat -plnt | grep ':80'
+
+# Check if httpd running
+/etc/init.d/nginx status
+# or
+/etc/init.d/apache2 status

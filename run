@@ -1,0 +1,2 @@
+# run command in background
+nohup command &
