@@ -1,0 +1,4 @@
+df -Th /dir
+du -sch /dir
+pydf
+discus
