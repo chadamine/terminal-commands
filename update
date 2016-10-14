@@ -1,0 +1,5 @@
+#!/bin/sh
+./.gitbits/gadd
+./.gitbits/gcommit
+./.gitbits/gpush
+

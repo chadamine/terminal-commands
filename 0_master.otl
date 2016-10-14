@@ -1,0 +1,31 @@
+
+Command Reference
+Master List
+
+Keyserver
+	Add Missing Key
+		Method 1 (easy)
+			sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <PUBKEY>
+				where <PUBKEY> is missing key for repo 
+			sudo apt-get update
+		Method 2
+			sudo gpg --keyserver pgpkeys.mit.edu --recv-key  <PUBKEY>
+			sudo gpg -a --export <PUBKEY> | sudo apt-key add -
+			sudo apt-get update
+PackageManagement
+	apt
+		add-apt-repository
+			Ubuntu 10.04/12.04
+				sudo apt-get install python-software-properties
+			Ubuntu 14.04
+				sudo apt-get install software-properties-common
+
+			sudo add-apt-repository ppa:x/stable
+			sudo apt-get update
+			sudo apt-get install ...
+Permissions
+	sudo/su
+		persistant
+			su -
+			:or
+			sudo -s
